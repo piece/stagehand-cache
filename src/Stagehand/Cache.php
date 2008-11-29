@@ -90,6 +90,8 @@ class Cache
      */
     public function __construct($cacheDirectory, $masterFile = null)
     {
+        $this->_checkCacheDirectory($cacheDirectory);
+
         if (substr($cacheDirectory, -1) != '/') {
             $cacheDirectory .= '/';
         }
@@ -179,6 +181,42 @@ class Cache
         \PEAR::staticPushErrorHandling(PEAR_ERROR_RETURN);
         $this->_cache->clean();
         \PEAR::staticPopErrorHandling();
+    }
+
+    /**#@-*/
+
+    /**#@+
+     * @access protected
+     */
+
+    /**#@-*/
+
+    /**#@+
+     * @access private
+     */
+
+    // }}}
+    // {{{ _checkCacheDirectory()
+
+    /**
+     * Checks whether the cache directory is ready-to-use or not.
+     *
+     * @param string $cacheDirectory
+     * @throws Stagehand\Cache\Exception
+     */
+    private function _checkCacheDirectory($cacheDirectory)
+    {
+        if (is_null($cacheDirectory)) {
+            throw new Exception('The cache directory is required.');
+        }
+
+        if (!file_exists($cacheDirectory)) {
+            throw new Exception("The cache directory [ $cacheDirectory ] is not found.");
+        }
+
+        if (!is_readable($cacheDirectory) || !is_writable($cacheDirectory)) {
+            throw new Exception("The cache directory [ $cacheDirectory ] is not readable or writable.");
+        }
     }
 
     /**#@-*/

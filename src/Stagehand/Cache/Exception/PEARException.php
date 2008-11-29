@@ -37,9 +37,9 @@
 
 namespace Stagehand;
 
-use Stagehand::Cache::Exception;
+use Stagehand\Cache\Exception;
 
-// {{{ Stagehand::Cache::Exception::PEARException
+// {{{ Stagehand\Cache\Exception\PEARException
 
 /**
  * An exception class to convert a PEAR_Error object to an Exception object.
@@ -83,9 +83,9 @@ class PEARException extends Exception
     /**
      * Converts a PEAR_Error object to an Exception object.
      *
-     * @param ::PEAR_Error $error
+     * @param \PEAR_Error $error
      */
-    public function __construct(::PEAR_Error $error)
+    public function __construct(\PEAR_Error $error)
     {
         parent::__construct('Type: ' . get_class($error) .
                             ' Message: ' . $error->getMessage() .

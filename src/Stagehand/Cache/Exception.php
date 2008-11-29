@@ -35,9 +35,9 @@
  * @since      File available since Release 0.1.0
  */
 
-namespace Stagehand::Cache;
+namespace Stagehand\Cache;
 
-// {{{ Stagehand::Cache::Exception
+// {{{ Stagehand\Cache\Exception
 
 /**
  * The base exception class for all Stagehand_Cache runtime exceptions.
@@ -48,7 +48,7 @@ namespace Stagehand::Cache;
  * @version    Release: @package_version@
  * @since      Class available since Release 0.1.0
  */
-class Exception extends ::Exception {}
+class Exception extends \Exception {}
 
 // }}}
 

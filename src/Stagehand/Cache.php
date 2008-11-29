@@ -37,9 +37,9 @@
 
 namespace Stagehand;
 
-use Stagehand::Cache::Exception::PEARException;
+use Stagehand\Cache\Exception\PEARException;
 
-// {{{ Stagehand::Cache
+// {{{ Stagehand\Cache
 
 /**
  * A simple cache manager.
@@ -95,16 +95,16 @@ class Cache
         }
 
         if (!is_null($masterFile)) {
-            $this->_cache = new ::Cache_Lite_File(array('cacheDir' => $cacheDirectory,
-                                                        'masterFile' => $masterFile,
-                                                        'automaticSerialization' => true,
-                                                        'errorHandlingAPIBreak' => true)
-                                                  );
+            $this->_cache = new \Cache_Lite_File(array('cacheDir' => $cacheDirectory,
+                                                       'masterFile' => $masterFile,
+                                                       'automaticSerialization' => true,
+                                                       'errorHandlingAPIBreak' => true)
+                                                 );
         } else {
-            $this->_cache = new ::Cache_Lite(array('cacheDir' => $cacheDirectory,
-                                                   'automaticSerialization' => true,
-                                                   'errorHandlingAPIBreak' => true)
-                                             );
+            $this->_cache = new \Cache_Lite(array('cacheDir' => $cacheDirectory,
+                                                  'automaticSerialization' => true,
+                                                  'errorHandlingAPIBreak' => true)
+                                            );
         }
     }
 
@@ -116,14 +116,14 @@ class Cache
      *
      * @param string $id
      * @return mixed
-     * @throws Stagehand::Cache::Exception::PEARException
+     * @throws Stagehand\Cache\Exception\PEARException
      */
     public function read($id)
     {
-        ::PEAR::staticPushErrorHandling(PEAR_ERROR_RETURN);
+        \PEAR::staticPushErrorHandling(PEAR_ERROR_RETURN);
         $subject = $this->_cache->get($id);
-        ::PEAR::staticPopErrorHandling();
-        if (::PEAR::isError($subject)) {
+        \PEAR::staticPopErrorHandling();
+        if (\PEAR::isError($subject)) {
             throw new PEARException($subject);
         }
 
@@ -141,14 +141,14 @@ class Cache
      * Writes the given object as a cache.
      *
      * @param mixed $subject
-     * @throws Stagehand::Cache::Exception::PEARException
+     * @throws Stagehand\Cache\Exception\PEARException
      */
     public function write($subject)
     {
-        ::PEAR::staticPushErrorHandling(PEAR_ERROR_RETURN);
+        \PEAR::staticPushErrorHandling(PEAR_ERROR_RETURN);
         $result = $this->_cache->save($subject);
-        ::PEAR::staticPopErrorHandling();
-        if (::PEAR::isError($result)) {
+        \PEAR::staticPopErrorHandling();
+        if (\PEAR::isError($result)) {
             throw new PEARException($result);
         }
     }
@@ -163,9 +163,9 @@ class Cache
      */
     public function remove($id)
     {
-        ::PEAR::staticPushErrorHandling(PEAR_ERROR_RETURN);
+        \PEAR::staticPushErrorHandling(PEAR_ERROR_RETURN);
         $this->_cache->remove($id);
-        ::PEAR::staticPopErrorHandling();
+        \PEAR::staticPopErrorHandling();
     }
 
     // }}}
@@ -176,9 +176,9 @@ class Cache
      */
     public function clear()
     {
-        ::PEAR::staticPushErrorHandling(PEAR_ERROR_RETURN);
+        \PEAR::staticPushErrorHandling(PEAR_ERROR_RETURN);
         $this->_cache->clean();
-        ::PEAR::staticPopErrorHandling();
+        \PEAR::staticPopErrorHandling();
     }
 
     /**#@-*/
